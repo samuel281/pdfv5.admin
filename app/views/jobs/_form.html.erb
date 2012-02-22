@@ -1,0 +1,47 @@
+
+<div class="clearfix">
+   <%= f.label :name, t("activerecord.attributes.job.name", :default => "Name"), :class => :label %>
+  <div class="input">
+    <%= f.text_field :name, :class => 'text_field' %>
+  </div>
+</div>
+
+<div class="clearfix">
+   <%= f.label :active, t("activerecord.attributes.job.active", :default => "Active"), :class => :label %>
+  <div class="input">
+    <%= f.check_box :active, :class => 'check_box' %>
+  </div>
+</div>
+
+<div class="clearfix">
+   <%= f.label :jar, t("activerecord.attributes.job.jar", :default => "Jar file name"), :class => :label %>
+  <div class="input">
+    <%= f.file_field :jar, :class => 'text_field' %>
+  </div>
+</div>
+
+<div class="clearfix">
+   <%= f.label :arguments, t("activerecord.attributes.job.arguments", :default => "Arguments"), :class => :label %>
+  <div class="input">
+    <%= f.text_field :arguments, :class => 'text_field' %>
+  </div>
+</div>
+
+<div class="clearfix">
+   <%= f.label :schedule_min, t("activerecord.attributes.job.schedule_min", :default => "Schedule min"), :class => :label %>
+  <div class="input">
+    <%= f.number_field :schedule_min, :class => 'number_field' %>
+  </div>
+</div>
+
+<div class="clearfix">
+   <%= f.label :description, t("activerecord.attributes.job.description", :default => "Description"), :class => :label %>
+  <div class="input">
+    <%= f.text_area :description, :class => 'text_area' %>
+  </div>
+</div>
+
+<div class="form-actions">
+  <button class="btn primary" type="submit">Save</button> or
+	<%= link_to "Cancel", jobs_path %>
+</div>

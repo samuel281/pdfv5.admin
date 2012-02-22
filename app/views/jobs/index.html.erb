@@ -1,0 +1,30 @@
+<h1>Jobs</h1>
+<table class="table table-striped">
+ <thead>
+  <tr>
+    <th>ID</th>
+        <th>
+      <%= t("activerecord.attributes.job.name", :default => t("activerecord.labels.name", :default => "Name")) %>
+    </th>
+        <th>Created at</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @jobs.each do |job| -%>
+   <tr>
+    <td><%= job.id %></td>
+        <td><%= link_to job.name, job_path(job) %>
+    </td>
+        <td><%= job.created_at %></td>
+    <td>
+      <%= link_to "Show", job_path(job) %>
+      <%= link_to "Edit", edit_job_path(job) %>
+      <%= link_to "Destroy", job_path(job), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+    </td>
+    </tr>
+    <% end -%>
+   </tbody>
+</table>
+
+<%= link_to "New", new_job_path, :class => 'btn btn-primary' %>

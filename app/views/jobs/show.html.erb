@@ -1,0 +1,33 @@
+
+<label class="label"><%= t("activerecord.attributes.job.name", :default => t("activerecord.labels.name", :default => "Name")) %>:</label>
+<p><%= @job.name %></p>
+
+<label class="label"><%= t("activerecord.attributes.job.active", :default => t("activerecord.labels.active", :default => "Active")) %>:</label>
+<p><%= @job.active %></p>
+
+<label class="label"><%= t("activerecord.attributes.job.arguments", :default => t("activerecord.labels.arguments", :default => "Arguments")) %>:</label>
+<p><%= @job.arguments %></p>
+
+<label class="label"><%= t("activerecord.attributes.job.schedule_min", :default => t("activerecord.labels.schedule_min", :default => "Schedule min")) %>:</label>
+<p><%= @job.schedule_min %></p>
+
+<label class="label"><%= t("activerecord.attributes.job.description", :default => t("activerecord.labels.description", :default => "Description")) %>:</label>
+<p><%= @job.description %></p>
+
+<label class="label"><%= t("activerecord.attributes.job.jar_file_name", :default => t("activerecord.labels.jar_file_name", :default => "Jar file name")) %>:</label>
+<p><%= @job.jar_file_name %></p>
+
+<label class="label"><%= t("activerecord.attributes.job.jar_content_type", :default => t("activerecord.labels.jar_content_type", :default => "Jar content type")) %>:</label>
+<p><%= @job.jar_content_type %></p>
+
+<label class="label"><%= t("activerecord.attributes.job.jar_file_size", :default => t("activerecord.labels.jar_file_size", :default => "Jar file size")) %>:</label>
+<p><%= @job.jar_file_size %></p>
+
+<label class="label"><%= t("activerecord.attributes.job.jar_updated_at", :default => t("activerecord.labels.jar_updated_at", :default => "Jar updated at")) %>:</label>
+<p><%= @job.jar_updated_at %></p>
+
+<div class="form-actions">
+<%= link_to "Back", jobs_path, :class => 'btn'  %>
+<%= link_to "Edit", edit_job_path(@job), :class => 'btn' %>
+<%= link_to "Delete", job_path(@job), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn' %>
+</div>
