@@ -1,12 +1,23 @@
 Pdfv5Admin::Application.routes.draw do
-  resources :jobs
+  root :to => "jobs#monitor"
+  resources :jobs do
+    resources :histories
+    collection do 
+      get 'monitor'
+    end
+  end
+  
+  resources :histories do
+    resources :logs
+  end
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  # Keep in mind you can assign va  lues other than :controller and :action
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

@@ -1,0 +1,113 @@
+#!/usr/bin/env ruby
+require 'wopen3'
+require 'net/http'
+require 'json'
+
+if ARGV.size <= 3
+  puts "usage : job_runner <rest_server> <job_id> <jar> <arguments...>"
+  exit(0)
+end
+
+class Rest
+    def initialize(rest_server)
+        @uri = URI.parse(rest_server)
+        @http = Net::HTTP.new(@uri.host, @uri.port)
+    end
+
+    def post(url, params)
+        request = Net::HTTP::Post.new(url)
+        request.add_field "Content-Type", "application/json"
+        request.body = params.to_json
+        response = @http.request(request)
+    end
+
+    def put (url, params)
+        request = Net::HTTP::Put.new(url)
+        request.add_field "Content-Type", "application/json"
+        request.body = params.to_json
+        response = @http.request(request)
+    end
+end
+
+class Joblog
+    def initialize(rest_server, job_id)
+        @rest_server = rest_server
+        @rest = Rest.new(@rest_server)
+        @job_id = job_id
+    end
+
+    def start
+        url = "#{@rest_server}/jobs/#{@job_id}/histories.json"
+        params = { 
+          :history => {
+            :start_at => Time.new
+          }
+        }
+        response = @rest.post(url, params)       
+        @trans_id = JSON.parse(response.body)['id']
+    end
+
+    def finish(result)
+        url = "#{@rest_server}/jobs/#{@job_id}/histories/#{@trans_id}.json"
+        params = { 
+          :history => {
+            :finish_at => Time.new,
+            :last_ack_at => Time.new,
+            :result => result
+          }
+        } 
+        @rest.put(url, params)
+    end
+
+    def log(type, message)
+        url = "#{@rest_server}/histories/#{@trans_id}/logs.json"
+        params = {
+            :log => {
+                :log_type => type,
+                :message => message
+            }
+        }
+        @rest.post(url, params)                
+    end
+end
+
+
+@rest_server = ARGV[0]
+@job_id = ARGV[1]
+@jar_path = ARGV[2]
+@argv = ARGV[3..ARGV.size-1]
+
+@joblog = Joblog.new(@rest_server, @job_id)
+@joblog.start
+
+Wopen3.popen3("HADOOP_CLASSPATH=#{@jar_path} hadoop jar #{@argv.join(' ')}") do |stdin, stdout, stderr|
+    threads = []
+    threads << Thread.new(stdout) do |out|
+        out.each { |line| @joblog.log "info", line }
+    end
+    threads << Thread.new(stderr) do |out|
+      errors = []
+      out.each { |line| 
+          if line.strip.match(/^at/).nil? and !errors.empty?
+            @joblog.log "error", errors.join
+            errors.clear
+          end
+          
+        errors << line
+      }
+        
+      unless errors.empty?
+        @joblog.log "error", errors.join
+        errors.clear
+      end
+    end
+    threads.each { |thread| thread.join }
+end
+
+if $?.exitstatus == 0
+  @joblog.finish ("success")
+else
+  @joblog.finish ("failure")
+end
+
+

@@ -80,4 +80,16 @@ class JobsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # GET /jobs/monitor
+  def monitor
+    @monitors = []
+    Job.all.each do |job|
+      @monitors << JobMonitor.new { |monitor|
+        monitor.job_name =job.name
+        monitor.last_history = job.histories.last
+      }
+    end
+    @monitors
+  end
 end

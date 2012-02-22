@@ -26,6 +26,8 @@
 <label class="label"><%= t("activerecord.attributes.job.jar_updated_at", :default => t("activerecord.labels.jar_updated_at", :default => "Jar updated at")) %>:</label>
 <p><%= @job.jar_updated_at %></p>
 
+<label class="label"> 실행이력</label>
+<p><%= link_to "보기", job_histories_url(@job) %>
 <div class="form-actions">
 <%= link_to "Back", jobs_path, :class => 'btn'  %>
 <%= link_to "Edit", edit_job_path(@job), :class => 'btn' %>

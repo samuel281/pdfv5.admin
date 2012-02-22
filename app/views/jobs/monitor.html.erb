@@ -1,0 +1,31 @@
+<h1>Job monitoring dashboard</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Job Name</th>
+      <th>Status</th>
+      <th>Start</th>
+      <th>Last Ping</th>
+      <th>Finish</th>
+      <th>Result</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @monitors.each do |monitor| %>
+    <tr>
+      <td><%= monitor.job_name %></td>
+      <td><%= monitor_status(monitor)%></td>
+      <td><%= monitor_started(monitor) %></td>
+      <td><%= monitor_pinged(monitor) %></td>
+      <td><%= monitor_finished(monitor) %></td>
+      <td><%= link_to "#{monitor_result(monitor)}", monitor_logs_url(monitor) %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

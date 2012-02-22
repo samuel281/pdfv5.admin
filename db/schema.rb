@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221045240) do
+ActiveRecord::Schema.define(:version => 20120222054513) do
+
+  create_table "histories", :force => true do |t|
+    t.integer  "job_id"
+    t.datetime "start_at"
+    t.datetime "last_ack_at"
+    t.datetime "finish_at"
+    t.string   "result"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "histories", ["job_id"], :name => "index_histories_on_job_id"
 
   create_table "jobs", :force => true do |t|
     t.string   "name"
@@ -26,5 +38,15 @@ ActiveRecord::Schema.define(:version => 20120221045240) do
     t.integer  "jar_file_size"
     t.datetime "jar_updated_at"
   end
+
+  create_table "logs", :force => true do |t|
+    t.integer  "history_id"
+    t.string   "log_type"
+    t.string   "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "logs", ["history_id"], :name => "index_logs_on_history_id"
 
 end

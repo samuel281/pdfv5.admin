@@ -1,0 +1,16 @@
+development:
+  crontab_user: sungwpark
+  rest_server: http://localhost:3000
+  sms_server: localhost
+  sms_port: 1234
+test:
+  crontab_user: sungwpark
+  rest_server: http://localhost:3000
+  sample_jar_path: spec/fixtures/
+  sms_server: localhost
+  sms_port: 1234
+production:
+  crontab_user: sungwpark
+  rest_server: http://localhost:3000
+  sms_server: localhost
+  sms_port: 1234

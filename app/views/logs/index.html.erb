@@ -1,0 +1,22 @@
+<h1>Logs</h1>
+<table class="table table-striped">
+ <thead>
+  <tr>
+    <th>Job</th>
+    <th>Created at</th>
+    <th>Type</th>
+    <th>Message</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @logs.each do |log| -%>
+   <tr>
+    <td><%= log.history.job.name %></td>
+    <td><%= log.created_at.to_formatted_s(:kor_long) %></td>
+    <td><%= log.log_type %></td>
+    <td><%= simple_format(log.message) %></td>
+   </tr>
+  <% end -%>
+  </tbody>
+</table>
+
