@@ -1,5 +1,12 @@
 <h1>Job monitoring dashboard</h1>
-
+<script>
+  setInterval(function(){
+    window.location = window.location;
+  },5000)
+</script>
+<div align="right">
+  refresh at : <%= Time.current.to_formatted_s(:kor_long)  %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>

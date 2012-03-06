@@ -5,13 +5,14 @@ class JobCron
   include CronEdit
     
   def initialize
-    Rails.logger.info "[cronjob] initializing for #{APP_CONFIG['crontab_user']}"
-    @crontab = Crontab.new APP_CONFIG['crontab_user']
+    #Rails.logger.info "[cronjob] initializing for #{APP_CONFIG['crontab_user']}"
+    #@crontab = Crontab.new APP_CONFIG['crontab_user']
   end
 
   def create(job)  
-    create_ntx(job)
-    @crontab.commit
+    Crontab.Add job.name, "#{schedule(job)} #{command(job)}" if job.active?
+    #create_ntx(job)
+    #@crontab.commit
   end
   
   def create_ntx(job)
@@ -20,8 +21,9 @@ class JobCron
   end
   
   def destroy(job)
-    destroy_ntx job
-    @crontab.commit
+    Crontab.remove job.name
+    #destroy_ntx job
+    #@crontab.commit
   end
   
   def destroy_ntx(job)
@@ -30,9 +32,11 @@ class JobCron
   end
   
   def replace(as_is, to_be)
-    destroy_ntx(as_is)
-    create_ntx(to_be)
-    @crontab.commit
+    destroy(as_is)
+    create(to_be)
+    #destroy_ntx(as_is)
+    #create_ntx(to_be)
+    #@crontab.commit
   end
   
  
