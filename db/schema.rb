@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120222054513) do
+ActiveRecord::Schema.define(:version => 20120306021757) do
 
   create_table "histories", :force => true do |t|
     t.integer  "job_id"
@@ -31,12 +31,9 @@ ActiveRecord::Schema.define(:version => 20120222054513) do
     t.string   "arguments"
     t.integer  "schedule_min"
     t.text     "description"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.string   "jar_file_name"
-    t.string   "jar_content_type"
-    t.integer  "jar_file_size"
-    t.datetime "jar_updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "jar_path"
   end
 
   create_table "logs", :force => true do |t|

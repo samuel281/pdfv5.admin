@@ -46,4 +46,8 @@ module JobsHelper
       "unknown"
     end
   end
+  
+  def runjars
+    Dir["#{APP_CONFIG['jar_base']}/**/*.jar"]      
+  end
 end

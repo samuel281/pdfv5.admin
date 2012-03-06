@@ -14,9 +14,9 @@
 </div>
 
 <div class="clearfix">
-   <%= f.label :jar, t("activerecord.attributes.job.jar", :default => "Jar file name"), :class => :label %>
+   <%= f.label :jar_path, :class => :label %>
   <div class="input">
-    <%= f.file_field :jar, :class => 'text_field' %>
+    <%= f.select(:jar_path, runjars) %>
   </div>
 </div>
 

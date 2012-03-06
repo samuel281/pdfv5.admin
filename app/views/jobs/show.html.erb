@@ -14,17 +14,8 @@
 <label class="label"><%= t("activerecord.attributes.job.description", :default => t("activerecord.labels.description", :default => "Description")) %>:</label>
 <p><%= @job.description %></p>
 
-<label class="label"><%= t("activerecord.attributes.job.jar_file_name", :default => t("activerecord.labels.jar_file_name", :default => "Jar file name")) %>:</label>
-<p><%= @job.jar_file_name %></p>
-
-<label class="label"><%= t("activerecord.attributes.job.jar_content_type", :default => t("activerecord.labels.jar_content_type", :default => "Jar content type")) %>:</label>
-<p><%= @job.jar_content_type %></p>
-
-<label class="label"><%= t("activerecord.attributes.job.jar_file_size", :default => t("activerecord.labels.jar_file_size", :default => "Jar file size")) %>:</label>
-<p><%= @job.jar_file_size %></p>
-
-<label class="label"><%= t("activerecord.attributes.job.jar_updated_at", :default => t("activerecord.labels.jar_updated_at", :default => "Jar updated at")) %>:</label>
-<p><%= @job.jar_updated_at %></p>
+<label class="label">jar path:</label>
+<p><%= @job.jar_path %></p>
 
 <label class="label"> 실행이력</label>
 <p><%= link_to "보기", job_histories_url(@job) %>

@@ -21,7 +21,7 @@ class JobCron
   end
   
   def destroy(job)
-    Crontab.remove job.name
+    Crontab.Remove job.name
     #destroy_ntx job
     #@crontab.commit
   end
@@ -45,6 +45,6 @@ class JobCron
   end
 
   def command(job)
-    "job_runner #{APP_CONFIG['rest_server']} #{job.id} #{job.jar.path} #{job.arguments}" 
+    "job_runner #{APP_CONFIG['rest_server']} #{job.id} #{job.jar_path} #{job.arguments}" 
   end
 end
