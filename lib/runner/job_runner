@@ -3,7 +3,7 @@ require 'wopen3'
 require 'net/http'
 require 'json'
 
-if ARGV.size <= 3
+if ARGV.size < 3
   puts "usage : job_runner <rest_server> <job_id> <jar> <arguments...>"
   exit(0)
 end
@@ -80,7 +80,7 @@ end
 @joblog = Joblog.new(@rest_server, @job_id)
 @joblog.start
 
-Wopen3.popen3("HADOOP_CLASSPATH=#{@jar_path} hadoop jar #{@argv.join(' ')}") do |stdin, stdout, stderr|
+Wopen3.popen3("HADOOP_CLASSPATH=#{@jar_path} && hadoop jar #{@jar_path} #{@argv.join(' ')}") do |stdin, stdout, stderr|
     threads = []
     threads << Thread.new(stdout) do |out|
         out.each { |line| @joblog.log "info", line }

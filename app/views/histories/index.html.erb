@@ -1,4 +1,4 @@
-<h1>Historys</h1>
+<h1>Histories</h1>
 <table class="table table-striped">
  <thead>
   <tr>
@@ -15,9 +15,9 @@
    <tr>
     <td><%= history.id %></td>
     <td><%= history.job.name %></td>
-    <td><%= history.start_at.to_formatted_s(:kor_long) %></td>
-    <td><%= history.last_ack_at.to_formatted_s(:kor_long) %></td>
-    <td><%= history.finish_at.to_formatted_s(:kor_long) %></td>
+    <td><%= history.start_at.to_formatted_s(:kor_long) unless history.start_at.nil? %></td>
+    <td><%= history.last_ack_at.to_formatted_s(:kor_long) unless history.last_ack_at.nil? %></td>
+    <td><%= history.finish_at.to_formatted_s(:kor_long) unless history.finish_at.nil? %></td>
     <td><%=  link_to  "#{history.result}", history_logs_url(history)%></td>
    </tr>
   <% end -%>

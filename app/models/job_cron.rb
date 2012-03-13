@@ -45,6 +45,6 @@ class JobCron
   end
 
   def command(job)
-    "job_runner #{APP_CONFIG['rest_server']} #{job.id} #{job.jar_path} #{job.arguments}" 
+    "#{Rails.root}/lib/runner/job_runner #{APP_CONFIG['rest_server']} #{job.id} #{job.jar_path} #{job.arguments}" 
   end
 end

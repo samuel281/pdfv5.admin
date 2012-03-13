@@ -9,18 +9,22 @@ module JobsHelper
   def monitor_started(monitor)
     return "unknown" if monitor.nil?
     return "" if monitor.last_history.nil?
+    return "" if monitor.last_history.start_at.nil?
+
     monitor.last_history.start_at.to_formatted_s(:kor_long)
   end
   
   def monitor_pinged(monitor)
     return "unknown" if monitor.nil?
     return "" if monitor.last_history.nil?
+    return "" if monitor.last_history.last_ack_at.nil?
     monitor.last_history.last_ack_at.to_formatted_s(:kor_long)
   end
   
   def monitor_finished(monitor)
     return "unknown" if monitor.nil?
     return "" if monitor.last_history.nil?
+    return "" if monitor.last_history.finish_at.nil?
     monitor.last_history.finish_at.to_formatted_s(:kor_long)
   end
   

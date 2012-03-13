@@ -1,9 +1,8 @@
 class HistoriesController < ApplicationController
   # GET /jobs/:job_id/histories
-  # GET /jobs/:job_id/histories.json
   def index
     @job = Job.find(params[:job_id])
-    @histories = @job.histories
+    @histories = @job.histories.find(:all, :limit => 20, :order => "id DESC")
 
     respond_to do |format|
       format.html # index.html.erb
