@@ -41,7 +41,7 @@ class JobCron
   
  
   def schedule(job)
-    "*/#{job.schedule_min} * * * *"
+    job.schedule
   end
 
   def command(job)

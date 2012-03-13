@@ -1,9 +1,9 @@
 development:
   crontab_user: hadoopuser
-  rest_server: http://localhost:8080
+  rest_server: http://localhost:3000
   sms_server: localhost
   sms_port: 1234
-  jar_base: /home/hadoopuser/run-jars
+  jar_base: /home/sungwpark/run-jars
 test:
   crontab_user: sungwpark
   rest_server: http://localhost:3000

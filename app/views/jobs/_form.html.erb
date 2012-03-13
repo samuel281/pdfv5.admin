@@ -28,9 +28,9 @@
 </div>
 
 <div class="clearfix">
-   <%= f.label :schedule_min, t("activerecord.attributes.job.schedule_min", :default => "Schedule min"), :class => :label %>
+   <%= f.label :schedule, t("activerecord.attributes.job.schedule", :default => "Schedule"), :class => :label %>
   <div class="input">
-    <%= f.number_field :schedule_min, :class => 'number_field' %>
+    <%= f.text_field :schedule, :class => 'text_field' %>
   </div>
 </div>
 
