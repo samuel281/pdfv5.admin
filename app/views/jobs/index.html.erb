@@ -6,7 +6,8 @@
         <th>
       <%= t("activerecord.attributes.job.name", :default => t("activerecord.labels.name", :default => "Name")) %>
     </th>
-        <th>Created at</th>
+    <th>Created at</th>
+    <th>Active</th>
     <th>Actions</th>
   </tr>
   </thead>
@@ -16,11 +17,13 @@
     <td><%= job.id %></td>
         <td><%= link_to job.name, job_path(job) %>
     </td>
-        <td><%= job.created_at %></td>
+    <td><%= job.created_at %></td>
+    <td><%= job.active? %></td>
     <td>
-      <%= link_to "Show", job_path(job) %>
-      <%= link_to "Edit", edit_job_path(job) %>
-      <%= link_to "Destroy", job_path(job), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      <%= link_to "Run Now!", job_path(job), :method => :run, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn btn-success' %>	
+      <%= link_to "Show", job_path(job), :class=> 'btn'%>
+      <%= link_to "Edit", edit_job_path(job), :class => 'btn btn-inverse'%>
+      <%= link_to "Destroy", job_path(job), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn btn-danger' %>
     </td>
     </tr>
     <% end -%>

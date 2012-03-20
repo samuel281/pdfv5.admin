@@ -15,3 +15,7 @@
 /tmp
 /nbproject/private/
 /public/system/
+
+
+# Ignore eclipse files
+.project
